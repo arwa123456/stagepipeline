@@ -1,0 +1,19 @@
+name: 'Terraform GitHub Actions'
+on:
+  - pull_request
+  - push:
+      branches:
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout'
+        uses: actions/checkout@main
+      - name: 'Terraform Format'
+        uses: arwa123456/STAGEDEV@main
+        with:
+          tf_actions_version: 1.2.5
+          tf_actions_subcommand: ['init','plan','apply']
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
